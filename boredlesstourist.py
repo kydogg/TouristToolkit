@@ -16,7 +16,7 @@ def get_destination_index(destination):
   return destination_index  # Return the index
 
 # Print the index of "Los Angeles, USA"
-print(get_destination_index("Los Angeles, USA"))
+# print(get_destination_index("Los Angeles, USA"))
 
 # Function to get the location of a traveler
 def get_traveler_location(traveler):
@@ -26,15 +26,12 @@ def get_traveler_location(traveler):
 
 # Get and print the location of the test traveler
 test_destination_index = get_traveler_location(test_traveler)
-print(test_destination_index)
+# print(test_destination_index)
 
 # Initialize an empty list for attractions
 attractions = []
 for destination in destinations: 
   attractions.append([])  # Add an empty list for each destination
-
-# Print the attractions list
-print(attractions)
 
 # Function to add an attraction to a destination
 def add_attraction(destination, attraction):
@@ -44,3 +41,36 @@ def add_attraction(destination, attraction):
     return
 
   attractions_for_destination = attractions[destination_index].append(attraction)  # Add the attraction to the destination's list
+
+# Adding attractions for various cities with their associated tags
+add_attraction("Shanghai, China", ["Yuz Museum", ["art", "museum"]])  # Adding an art museum in Shanghai
+add_attraction("Shanghai, China", ["Oriental Pearl Tower", ["skyscraper", "viewing deck"]])  # Adding a skyscraper in Shanghai
+add_attraction("Los Angeles, USA", ["LACMA", ["art", "museum"]])  # Adding an art museum in Los Angeles
+add_attraction("São Paulo, Brazil", ["São Paulo Zoo", ["zoo"]])  # Adding a zoo in São Paulo
+add_attraction("São Paulo, Brazil", ["Pátio do Colégio", ["historical site"]])  # Adding a historical site in São Paulo
+add_attraction("Cairo, Egypt", ["Pyramids of Giza", ["monument", "historical site"]])  # Adding a historical monument in Cairo
+add_attraction("Cairo, Egypt", ["Egyptian Museum", ["museum"]])  # Adding a museum in Cairo
+
+print(attractions)  # Printing the list of attractions
+
+# Function to find attractions in a given city that match the user's interests
+def find_attractions(destination, interests):
+  destination_index = get_destination_index(destination)  # Getting the index of the destination in the list
+  attractions_in_city = attractions[destination_index]  # Getting the attractions in the city
+
+
+# Function to find attractions in a given city that match the user's interests
+def find_attractions(destination, interests):
+  destination_index = get_destination_index(destination)  # Getting the index of the destination in the list
+  attractions_in_city = attractions[destination_index]  # Getting the attractions in the city
+  attractions_with_interest = []  # Initializing an empty list for attractions with the user's interests
+  for attraction in attractions_in_city:
+    possible_attraction = attraction  # Get the attraction
+    attraction_tags = attraction[1]  # Get the attraction's tags
+    for interest in interests:  # For each interest
+      if interest in attraction_tags:  # If the interest is in the attraction's tags
+        attractions_with_interest.append(possible_attraction[0])  # Add the attraction to the list of attractions with the user's interests
+  return attractions_with_interest
+
+la_arts = find_attractions("Los Angeles, USA", ['art'])  # Find art attractions in Los Angeles
+print(la_arts) 
