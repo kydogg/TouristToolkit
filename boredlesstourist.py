@@ -46,6 +46,7 @@ def add_attraction(destination, attraction):
 add_attraction("Shanghai, China", ["Yuz Museum", ["art", "museum"]])  # Adding an art museum in Shanghai
 add_attraction("Shanghai, China", ["Oriental Pearl Tower", ["skyscraper", "viewing deck"]])  # Adding a skyscraper in Shanghai
 add_attraction("Los Angeles, USA", ["LACMA", ["art", "museum"]])  # Adding an art museum in Los Angeles
+add_attraction("Paris, France", ["Arc de Triomphe", ["monument", "historical site"]])  # Adding a historical monument in Paris
 add_attraction("São Paulo, Brazil", ["São Paulo Zoo", ["zoo"]])  # Adding a zoo in São Paulo
 add_attraction("São Paulo, Brazil", ["Pátio do Colégio", ["historical site"]])  # Adding a historical site in São Paulo
 add_attraction("Cairo, Egypt", ["Pyramids of Giza", ["monument", "historical site"]])  # Adding a historical monument in Cairo
@@ -74,3 +75,23 @@ def find_attractions(destination, interests):
 
 la_arts = find_attractions("Los Angeles, USA", ['art'])  # Find art attractions in Los Angeles
 print(la_arts) 
+
+# function to connect people withj the attractions that they are interested in
+def get_attractions_for_traveler(traveler):
+  traveler_destination = traveler[1]
+  traveler_interests = traveler[2]
+  
+  traveler_attractions = find_attractions(traveler_destination, traveler_interests)
+
+  interest_string = "Hi " + traveler[0] + ", we think you'll like these places around " + traveler_destination + ": "
+  for i in range(len(traveler_attractions)):
+    if traveler_attractions[-1] == traveler_attractions[i]:
+      interest_string += traveler_attractions[i] + "."
+    else:
+      interest_string += traveler_attractions[i] + ", "
+  interest_string = interest_string.rstrip(", ")  # Remove the trailing comma and space
+  return interest_string
+
+
+smills_france = get_attractions_for_traveler(['Dereck Smill', 'Paris, France', ['monument']])
+print(smills_france)
